@@ -24,6 +24,7 @@ type Configuration struct {
 	Tunnels            map[string]*TunnelConfiguration `yaml:"tunnels,omitempty"`
 	LogTo              string                          `yaml:"-"`
 	Path               string                          `yaml:"-"`
+	Password           string                          `yaml:"password,omitempty"`
 }
 
 type TunnelConfiguration struct {
@@ -137,6 +138,10 @@ func LoadConfiguration(opts *Options) (config *Configuration, err error) {
 	config.Path = configPath
 	if opts.authtoken != "" {
 		config.AuthToken = opts.authtoken
+	}
+
+	if opts.password != "" {
+		config.Password = opts.password
 	}
 
 	switch opts.command {

@@ -36,6 +36,7 @@ type Options struct {
 	config    string
 	logto     string
 	authtoken string
+	password  string
 	httpauth  string
 	hostname  string
 	protocol  string
@@ -66,6 +67,11 @@ func parseArgs() (opts *Options, err error) {
 		"",
 		"Authentication token for identifying an ngrok.com account")
 
+	password := flag.String(
+		"password",
+		"",
+		"Password to authenticate to server")
+
 	httpauth := flag.String(
 		"httpauth",
 		"",
@@ -95,6 +101,7 @@ func parseArgs() (opts *Options, err error) {
 		subdomain: *subdomain,
 		protocol:  *protocol,
 		authtoken: *authtoken,
+		password:  *password,
 		hostname:  *hostname,
 		command:   flag.Arg(0),
 	}

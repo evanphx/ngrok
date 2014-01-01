@@ -82,6 +82,11 @@ func NewControl(ctlConn conn.Conn, authMsg *msg.Auth) {
 		ctlConn.Close()
 	}
 
+	if opts.password != authMsg.Password {
+		failAuth(fmt.Errorf("Invalid password"))
+		return
+	}
+
 	// register the clientid
 	c.id = authMsg.ClientId
 	if c.id == "" {
